@@ -5,6 +5,7 @@ class Counter extends React.Component{
         this.state={value:0}
     }
     increse=()=>{
+        this.props.increase()
         this.setState((prevState)=>({
             value:prevState.value+1
         }))
@@ -14,19 +15,14 @@ class Counter extends React.Component{
         this.setState(prevState=>({
             value:prevState.value-1
         }))
+        this.props.decrease()
     }
 
-    haha=()=>{
-        this.setState(()=>({
-            value:this.state.value+8
-        }))
-    }
     render(){
         return <div>
             <button onClick={this.increse}>+</button>
             <mark>{this.state.value}</mark>
             <button onClick={this.decrese}>-</button>
-            <button onClick={this.haha}>haha</button>
         </div>
     }
 }
