@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <CounterGroup number={7} />
+        <CounterGroup/>
       </header>
     </div>
   );
