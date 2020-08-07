@@ -1,60 +1,40 @@
 import React from 'react';
-import { connect } from 'react-redux'
 
 class Counter extends React.Component {
     constructor(props) {
+        console.log(props)
         super(props)
-        this.state = { value: 0 }
+        this.state = {value: 0}
     }
-    //加1事件
-    onIncrement() {
-        this.props.Increase();
-    }
-    //减1事件
-    onDecrement() {
-        this.props.Decrease();
-    }
-    increse = () => {
+
+    increase = () => {
         this.props.increase()
         this.setState((prevState) => ({
             value: prevState.value + 1
         }))
     }
 
-    decrese = () => {
+    decrease = () => {
+        this.props.decrease()
         this.setState(prevState => ({
             value: prevState.value - 1
         }))
-        this.props.decrease()
     }
 
     componentWillReceiveProps = (nextProps) => {
-        console.log("receive")
-        // this.setState({ value: 0 })
+        if (this.props.size !== nextProps.size) {
+            this.setState({value: 0})
+        }
     }
+
 
     render() {
         return <div>
-            <button onClick={this.onIncrement}>+</button>
+            <button onClick={this.increase}>+</button>
             <mark>{this.state.value}</mark>
-            <button onClick={this.decrese}>-</button>
+            <button onClick={this.decrease}>-</button>
         </div>
     }
 }
-function mapStateToProps(state) {
-    return state;
-};
 
-function mapDispatchToProps(dispatch) {
-    return {
-        Increase: function () {
-            return dispatch({ type: "COUNTER_INCRE" })
-        },
-        Decrease: function () {
-            return dispatch({ type: "COUNTER_DECRE" })
-        }
-    }
-};
-
-const CounterPackage = connect(mapStateToProps, mapDispatchToProps)(Counter);
 export default Counter
